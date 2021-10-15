@@ -80,7 +80,7 @@ end
 1. 修改kong.conf文件，添加或者修改下面的配置项。
 ```
 # bundled 表示kong内置的所有插件
-plugins = bundled,huidu
+plugins = bundled,ip-ldap-auth
 # 添加huidu插件目录绝对路径
 lua_package_path = /vikadata/kong/kong-plugin-ip-ldap-auth/?.lua;./?.lua;./?/init.lua;;
 ```
@@ -149,24 +149,29 @@ curl http://127.0.0.1:81/plugins/enabled
 正式环境通过 luarocks 来部署。
 
 编辑kong-plugin-ip-ldap-auth-0.1.0-1.rockspec文件，修改下面几个配置
-
+```azure
 package = "kong-plugin-ip-ldap-auth”
 source = {
 url = "https://github.com/paylm/kong-plugin-ip-ldap-auth.git",
 tag = "0.1.0"
 }
+```
 下面是本地mac上安装的情况
 
-$ luarocks make —-verbose
 
-...
+```azure
+$ luarocks make —-verbose
+```
 kong-plugin-ip-ldap-auth 0.1.0-1 is now installed in /usr/local/opt/kong (license: Apache 2.0)
 mac 下安装完成后lua代码会安装到
-
+```azure
 /usr/local/opt/kong/share/lua/5.1/kong/plugins/ip-ldap-auth
+```
 linux会安装到这个目录下
 
+```azure
 /usr/local/share/lua/5.1/kong/plugins/ip-ldap-auth
+```
 这样就不需要在kong.conf中配置绝对路径了。
 
 安装完成后需要运行kong restart命令才能生效。
