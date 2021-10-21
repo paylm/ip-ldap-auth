@@ -216,7 +216,8 @@ local function do_authentication(conf)
     return false, {
       status = 401,
       message = "Unauthorized",
-      headers = { ["WWW-Authenticate"] = scheme .. ' realm="kong"' }
+      -- 在chrome safari 浏览器不能显示，ie 和 firefox正常
+      headers = { ["WWW-Authenticate"] = scheme .. ' realm="请使用维格通行证邮箱帐号"' }
     }
   end
 
